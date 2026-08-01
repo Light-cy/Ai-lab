@@ -1,15 +1,14 @@
 graph={
     'S':{'A':3,'C':2,'D':2},
     'A':{},
-    'B':{'E':2,},
-    'C':{'F':1 },
-    'D':{'B':3,'G':8,},
+    'C':{'F':1},
+    'D':{'B':3,'G':8},
+    'B':{'E':2},
     'E':{'G':2},
-    'F':{'E':0,'G':4,},
-    'G':{},
+    'F':{'E':0,'G':4},
+    'G':{}
 }
-
-Heuristic={
+H={
     'S':20,
     'A':18,
     'C':16,
@@ -19,66 +18,41 @@ Heuristic={
     'F':10,
     'G':0
 }
-def GBFS(startingNode, goal,myGraph):
-    cost=0
-    path=[startingNode]
-    
-    visited =[]
-    # queue=[3,'S-A',2,'S-C',2,'S-D']
-    queue=[cost,path]
-    #Even Index = Cost, Odd Index = Relevant PATH
+
+def GBFS(start,goal):
+    cost =0
+    path = ["S"]
+    visited=[]
+    queue = [cost,path]
     
     while queue:
-        index=0
-        minIndex=0
-        #queue=[3,'[S,A]',2, '[S,D]']
-        while index < len(queue):
+        index =0
+        minIndex =0
+        while index <len(queue):
             
-            #Iter =1
-            # queue[0] > queue[0]
-            # 0 > 0
-            
-            
-            #iter=2
-            # queue[0] > queue[2]
-            # 3>2
-            
-            # Iter =3
-            # queue[2] > queue[4]
-            # 2 > 2
-             #queue=[3,'[S,A]',2, '[S,D]']
-            currentNode = Heuristic[queue[minIndex+1][len(queue[minIndex+1])-1]]
-            nextNode = Heuristic[queue[inde+1][len(queue[index+1])-1]]
-            
-            if currentNode > nextNode:
+            current = H[queue[minIndex+1][len(queue[minIndex+1])-1]]
+            next= H[queue[index+1][len(queue[index+1])-1]]
+            if current > next: # ye heuristic control krti
                 minIndex=index
-            index=index+2
+            index = index+2
             
-        cost= queue.pop(minIndex) #2
-        path = queue.pop(minIndex) #[S,C,E,F]
-        last_visited=path[-1] #C
+        cost = queue.pop(minIndex)
+        path = queue.pop(minIndex)
+        last = path[-1]
         
-        if last_visited not in visited:
-            visited.append(last_visited)
-            
-        if last_visited == goal:
-            path.append(cost)
+        if last not in visited:
+            visited.append(last)
+        if last == goal:
+            path.append(str(cost))
             return path
         
-        
-        for child in myGraph[last_visited].keys():#A, C, D
-            newPath = list(path)  # [S]
-            newPath.append(child) # [S,D]
-            queue.append(cost+myGraph[last_visited][child])
-            queue.append(newPath)
-    
-print(GBFS('S','G',graph))
+        for child in graph[last].keys():
+            NewPath = list(path)  
+            NewPath.append(child)    
+            queue.append(cost + graph[last][child]) 
+            queue.append(NewPath)
     
     
-
-
-# if (queue[minIndex]> queue[index]):
-
-
-
-
+    
+print(GBFS('S', 'G'))
+    

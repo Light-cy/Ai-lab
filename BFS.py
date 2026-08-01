@@ -1,30 +1,25 @@
-graph={
-    'A':['B','C','D'],
-    'B':[],
-    'C':['E','F'],
+graph ={
+
+    'A':['B','C'],
+    'B':['D','E'],
+    'C':['F'],
+    'D':[],
     'E':[],
-    'D':['F'],
     'F':[]
 }
+visited =[]
+queue =[]
 
-queue=[]
-visited=[]
-
-def BFS(startingNode,graph):
-    #Step 01
-    queue.append(startingNode)
+def BFS(startingNode,visited):
     visited.append(startingNode)
+    queue.append(startingNode)
     
-    #Step 02
     while queue:
-        node=queue.pop(0)
-        print(node,end=" ")
-        #step 03
-        for child in graph[node]:  #B, C, D
+        node = queue.pop(0)
+        print(node, end="  ")
+        for child in graph[node]:
             if child not in visited:
-                queue.append(child)
                 visited.append(child)
-
-
-BFS('A',graph)
-
+                queue.append(child)
+            
+BFS('A', visited)

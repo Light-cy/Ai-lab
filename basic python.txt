@@ -1,0 +1,602 @@
+```python
+# ===== TASK 1: Calculate area of circle =====
+def task1():
+    radius = float(input("Enter radius: "))
+    area = 3.14159 * radius * radius
+    print("Area:", area)
+
+# ===== TASK 2: Check divisible by number =====
+def task2():
+    num = int(input("Enter number: "))
+    div = int(input("Divisor: "))
+    if num % div == 0:
+        print("Divisible")
+    else:
+        print("Not divisible")
+
+# ===== TASK 3: Print reverse pyramid =====
+def task3():
+    rows = int(input("Rows: "))
+    for i in range(rows, 0, -1):
+        for j in range(1, i + 1):
+            print("*", end=" ")
+        print()
+
+# ===== TASK 4: Sum of even digits =====
+def task4():
+    num = int(input("Number: "))
+    sum_even = 0
+    while num > 0:
+        digit = num % 10
+        if digit % 2 == 0:
+            sum_even += digit
+        num = num // 10
+    print("Sum even digits:", sum_even)
+
+# ===== TASK 5: Check happy number =====
+def task5():
+    num = int(input("Number: "))
+    seen = []
+    while num != 1 and num not in seen:
+        seen.append(num)
+        sum_sq = 0
+        while num > 0:
+            digit = num % 10
+            sum_sq += digit * digit
+            num = num // 10
+        num = sum_sq
+    if num == 1:
+        print("Happy")
+    else:
+        print("Not happy")
+
+# ===== TASK 6: Generate triangular numbers =====
+def task6():
+    n = int(input("Limit: "))
+    tri = []
+    for i in range(1, n + 1):
+        tri.append(i * (i + 1) // 2)
+    print("Triangular:", tri)
+
+# ===== TASK 7: Check automorphic number =====
+def task7():
+    num = int(input("Number: "))
+    sq = num * num
+    num_str = str(num)
+    sq_str = str(sq)
+    if sq_str.endswith(num_str):
+        print("Automorphic")
+    else:
+        print("Not automorphic")
+
+# ===== TASK 8: Find HCF of numbers =====
+def task8():
+    a = int(input("First: "))
+    b = int(input("Second: "))
+    while b != 0:
+        temp = b
+        b = a % b
+        a = temp
+    print("HCF:", a)
+
+# ===== TASK 9: Convert octal to decimal =====
+def task9():
+    octal = input("Octal: ")
+    decimal = 0
+    power = 0
+    i = len(octal) - 1
+    while i >= 0:
+        decimal += int(octal[i]) * (8 ** power)
+        power += 1
+        i -= 1
+    print("Decimal:", decimal)
+
+# ===== TASK 10: Decimal to octal =====
+def task10():
+    num = int(input("Decimal: "))
+    octal = ""
+    while num > 0:
+        rem = num % 8
+        octal = str(rem) + octal
+        num = num // 8
+    print("Octal:", octal)
+
+# ===== TASK 11: Check alphabet or digit =====
+def task11():
+    char = input("Char: ")
+    if (char >= 'a' and char <= 'z') or (char >= 'A' and char <= 'Z'):
+        print("Alphabet")
+    elif char >= '0' and char <= '9':
+        print("Digit")
+    else:
+        print("Special")
+
+# ===== TASK 12: Days between two years =====
+def task12():
+    year1 = int(input("Year1: "))
+    year2 = int(input("Year2: "))
+    days = 0
+    for y in range(year1, year2):
+        if (y % 4 == 0 and y % 100 != 0) or (y % 400 == 0):
+            days += 366
+        else:
+            days += 365
+    print("Days:", days)
+
+# ===== TASK 13: Calculate EMI =====
+def task13():
+    principal = float(input("Principal: "))
+    rate = float(input("Rate: ")) / 12 / 100
+    time = float(input("Months: "))
+    emi = principal * rate * ((1 + rate) ** time) / (((1 + rate) ** time) - 1)
+    print("EMI:", emi)
+
+# ===== TASK 14: Binary search recursive =====
+def task14():
+    def bin_search(arr, low, high, target):
+        if low > high:
+            return -1
+        mid = (low + high) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            return bin_search(arr, mid + 1, high, target)
+        else:
+            return bin_search(arr, low, mid - 1, target)
+    numbers = [1, 3, 5, 7]
+    target = int(input("Target: "))
+    print("Index:", bin_search(numbers, 0, len(numbers) - 1, target))
+
+# ===== TASK 15: Quick sort =====
+def task15():
+    def quick(arr):
+        if len(arr) <= 1:
+            return arr
+        pivot = arr[0]
+        left = []
+        right = []
+        for x in arr[1:]:
+            if x < pivot:
+                left.append(x)
+            else:
+                right.append(x)
+        return quick(left) + [pivot] + quick(right)
+    numbers = [5, 3, 8, 4]
+    print("Sorted:", quick(numbers))
+
+# ===== TASK 16: Matrix subtraction =====
+def task16():
+    mat1 = [[1,2],[3,4]]
+    mat2 = [[5,6],[7,8]]
+    result = [[0,0],[0,0]]
+    for i in range(2):
+        for j in range(2):
+            result[i][j] = mat1[i][j] - mat2[i][j]
+    print("Subtracted:", result)
+
+# ===== TASK 17: Vigenere cipher encrypt =====
+def task17():
+    text = input("Text: ").upper()
+    key = input("Key: ").upper()
+    encrypted = ""
+    k = 0
+    for char in text:
+        if char >= 'A' and char <= 'Z':
+            shift = ord(key[k % len(key)]) - ord('A')
+            encrypted += chr((ord(char) - ord('A') + shift) % 26 + ord('A'))
+            k += 1
+        else:
+            encrypted += char
+    print("Encrypted:", encrypted)
+
+# ===== TASK 18: Vigenere cipher decrypt =====
+def task18():
+    text = input("Text: ").upper()
+    key = input("Key: ").upper()
+    decrypted = ""
+    k = 0
+    for char in text:
+        if char >= 'A' and char <= 'Z':
+            shift = ord(key[k % len(key)]) - ord('A')
+            decrypted += chr((ord(char) - ord('A') - shift) % 26 + ord('A'))
+            k += 1
+        else:
+            decrypted += char
+    print("Decrypted:", decrypted)
+
+# ===== TASK 19: Validate phone number =====
+def task19():
+    phone = input("Phone: ")
+    valid = True
+    if len(phone) != 10:
+        valid = False
+    for char in phone:
+        if char < '0' or char > '9':
+            valid = False
+            break
+    print("Valid" if valid else "Invalid")
+
+# ===== TASK 20: Count haiku syllables =====
+def task20():
+    line = input("Line: ").lower()
+    vowels = "aeiouy"
+    count = 0
+    for i in range(len(line)):
+        if line[i] in vowels:
+            if i == 0 or line[i-1] not in vowels:
+                count += 1
+    if line.endswith('e'):
+        count -= 1
+    if count < 1:
+        count = 1
+    print("Syllables:", count)
+
+# ===== TASK 21: Convert to Morse code =====
+def task21():
+    morse = {'A':'.-', 'B':'-...', 'C':'-.-.', 'D':'-..'}
+    word = input("Word: ").upper()
+    code = ""
+    for char in word:
+        if char in morse:
+            code += morse[char] + " "
+    print("Morse:", code.strip())
+
+# ===== TASK 22: Morse to text =====
+def task22():
+    morse_rev = {'.-':'A', '-...':'B', '-.-.':'C', '-..':'D'}
+    code = input("Morse: ").split()
+    text = ""
+    for sym in code:
+        if sym in morse_rev:
+            text += morse_rev[sym]
+    print("Text:", text)
+
+# ===== TASK 23: Calculate circle circumference =====
+def task23():
+    radius = float(input("Radius: "))
+    circ = 2 * 3.14159 * radius
+    print("Circumference:", circ)
+
+# ===== TASK 24: Print arrow pattern =====
+def task24():
+    rows = int(input("Rows: "))
+    for i in range(1, rows + 1):
+        for j in range(1, i + 1):
+            print("*", end="")
+        print()
+    for i in range(rows - 1, 0, -1):
+        for j in range(1, i + 1):
+            print("*", end="")
+        print()
+
+# ===== TASK 25: Power recursion =====
+def task25():
+    def power(base, exp):
+        if exp == 0:
+            return 1
+        return base * power(base, exp - 1)
+    base = int(input("Base: "))
+    exp = int(input("Exp: "))
+    print("Power:", power(base, exp))
+
+# ===== TASK 26: Check abundant number =====
+def task26():
+    num = int(input("Number: "))
+    sum_div = 0
+    for i in range(1, num):
+        if num % i == 0:
+            sum_div += i
+    if sum_div > num:
+        print("Abundant")
+    else:
+        print("Not abundant")
+
+# ===== TASK 27: Generate multiples =====
+def task27():
+    num = int(input("Number: "))
+    limit = int(input("Limit: "))
+    mult = []
+    for i in range(1, limit + 1):
+        mult.append(num * i)
+    print("Multiples:", mult)
+
+# ===== TASK 28: Product of digits =====
+def task28():
+    num = int(input("Number: "))
+    prod = 1
+    while num > 0:
+        digit = num % 10
+        prod *= digit
+        num = num // 10
+    print("Product digits:", prod)
+
+# ===== TASK 29: Convert case without swapcase =====
+def task29():
+    text = input("Text: ")
+    converted = ""
+    for char in text:
+        if char >= 'a' and char <= 'z':
+            converted += chr(ord(char) - 32)
+        elif char >= 'A' and char <= 'Z':
+            converted += chr(ord(char) + 32)
+        else:
+            converted += char
+    print("Converted:", converted)
+
+# ===== TASK 30: Find duplicate words =====
+def task30():
+    text = input("Sentence: ")
+    words = text.split()
+    dups = []
+    seen = []
+    for word in words:
+        if word in seen and word not in dups:
+            dups.append(word)
+        seen.append(word)
+    print("Duplicates:", dups)
+
+# ===== TASK 31: Zip two lists =====
+def task31():
+    list1 = [1, 2, 3]
+    list2 = ['a', 'b', 'c']
+    zipped = []
+    for i in range(min(len(list1), len(list2))):
+        zipped.append((list1[i], list2[i]))
+    print("Zipped:", zipped)
+
+# ===== TASK 32: Unzip list of tuples =====
+def task32():
+    zipped = [(1, 'a'), (2, 'b')]
+    list1 = []
+    list2 = []
+    for a, b in zipped:
+        list1.append(a)
+        list2.append(b)
+    print("Unzipped:", list1, list2)
+
+# ===== TASK 33: Chunk list into groups =====
+def task33():
+    numbers = [1, 2, 3, 4, 5, 6]
+    size = 2
+    chunks = []
+    for i in range(0, len(numbers), size):
+        chunks.append(numbers[i:i + size])
+    print("Chunks:", chunks)
+
+# ===== TASK 34: Transpose list of lists =====
+def task34():
+    mat = [[1,2,3],[4,5,6]]
+    trans = []
+    for j in range(len(mat[0])):
+        row = []
+        for i in range(len(mat)):
+            row.append(mat[i][j])
+        trans.append(row)
+    print("Transposed:", trans)
+
+# ===== TASK 35: Simple tic tac toe check =====
+def task35():
+    board = [['X','O','X'],['O','X','O'],['X','O','X']]
+    win = False
+    for i in range(3):
+        if board[i][0] == board[i][1] == board[i][2]:
+            win = True
+    print("Win:" if win else "No win")
+
+# ===== TASK 36: Hangman word guess =====
+def task36():
+    word = "hello"
+    guess = input("Guess letter: ")
+    if guess in word:
+        print("Present")
+    else:
+        print("Not present")
+
+# ===== TASK 37: Calculate quadratic roots =====
+def task37():
+    a = float(input("A: "))
+    b = float(input("B: "))
+    c = float(input("C: "))
+    disc = b*b - 4*a*c
+    if disc >= 0:
+        root1 = (-b + disc**0.5) / (2*a)
+        root2 = (-b - disc**0.5) / (2*a)
+        print("Roots:", root1, root2)
+    else:
+        print("Complex")
+
+# ===== TASK 38: Convert decimal to binary recursive =====
+def task38():
+    def to_bin(n):
+        if n == 0:
+            return ""
+        return to_bin(n // 2) + str(n % 2)
+    num = int(input("Decimal: "))
+    print("Binary:", to_bin(num))
+
+# ===== TASK 39: Merge two sorted arrays =====
+def task39():
+    arr1 = [1,3,5]
+    arr2 = [2,4,6]
+    merged = []
+    i = 0
+    j = 0
+    while i < len(arr1) and j < len(arr2):
+        if arr1[i] < arr2[j]:
+            merged.append(arr1[i])
+            i += 1
+        else:
+            merged.append(arr2[j])
+            j += 1
+    while i < len(arr1):
+        merged.append(arr1[i])
+        i += 1
+    while j < len(arr2):
+        merged.append(arr2[j])
+        j += 1
+    print("Merged:", merged)
+
+# ===== TASK 40: Rotate matrix 90 degrees =====
+def task40():
+    mat = [[1,2],[3,4]]
+    rotated = [[0,0],[0,0]]
+    for i in range(2):
+        for j in range(2):
+            rotated[j][1 - i] = mat[i][j]
+    print("Rotated:", rotated)
+
+# ===== TASK 41: Simple bubble sort descending =====
+def task41():
+    numbers = [5,3,8,4]
+    n = len(numbers)
+    for i in range(n):
+        for j in range(0, n - i - 1):
+            if numbers[j] < numbers[j + 1]:
+                temp = numbers[j]
+                numbers[j] = numbers[j + 1]
+                numbers[j + 1] = temp
+    print("Desc sorted:", numbers)
+
+# ===== TASK 42: Count file lines =====
+def task42():
+    with open("count.txt", "w") as file:
+        file.write("Line1\nLine2")
+    count = 0
+    with open("count.txt", "r") as file:
+        line = file.readline()
+        while line:
+            count += 1
+            line = file.readline()
+    print("Lines:", count)
+
+# ===== TASK 43: Write list to file =====
+def task43():
+    lst = [1,2,3]
+    with open("list.txt", "w") as file:
+        for item in lst:
+            file.write(str(item) + "\n")
+    print("Written")
+
+# ===== TASK 44: Read dict from file =====
+def task44():
+    with open("dict.txt", "w") as file:
+        file.write("a:1\nb:2")
+    d = {}
+    with open("dict.txt", "r") as file:
+        line = file.readline()
+        while line:
+            key, val = line.strip().split(':')
+            d[key] = int(val)
+            line = file.readline()
+    print("Dict:", d)
+
+# ===== TASK 45: Simple CSV reader =====
+def task45():
+    with open("csv.txt", "w") as file:
+        file.write("name,age\nAlice,30")
+    rows = []
+    with open("csv.txt", "r") as file:
+        line = file.readline()
+        while line:
+            rows.append(line.strip().split(','))
+            line = file.readline()
+    print("CSV:", rows)
+
+# ===== TASK 46: Set difference without operator =====
+def task46():
+    set1 = {1,2,3}
+    set2 = {3,4,5}
+    diff = []
+    for item in set1:
+        if item not in set2:
+            diff.append(item)
+    print("Difference:", diff)
+
+# ===== TASK 47: Dict key exists check =====
+def task47():
+    d = {"a":1, "b":2}
+    key = input("Key: ")
+    exists = False
+    for k in d:
+        if k == key:
+            exists = True
+            break
+    print("Exists" if exists else "Not exists")
+
+# ===== TASK 48: List comprehension simulate =====
+def task48():
+    numbers = [1,2,3,4]
+    squares = []
+    for num in numbers:
+        squares.append(num * num)
+    print("Squares:", squares)
+
+# ===== TASK 49: Filter odds =====
+def task49():
+    numbers = [1,2,3,4]
+    odds = []
+    for num in numbers:
+        if num % 2 != 0:
+            odds.append(num)
+    print("Odds:", odds)
+
+# ===== TASK 50: Map add one =====
+def task50():
+    numbers = [1,2,3]
+    added = []
+    for num in numbers:
+        added.append(num + 1)
+    print("Added:", added)
+
+
+Here are the names of all 50 functions:
+1. `task1()` - Calculate area of circle
+2. `task2()` - Check divisible by number
+3. `task3()` - Print reverse pyramid
+4. `task4()` - Sum of even digits
+5. `task5()` - Check happy number
+6. `task6()` - Generate triangular numbers
+7. `task7()` - Check automorphic number
+8. `task8()` - Find HCF of numbers
+9. `task9()` - Convert octal to decimal
+10. `task10()` - Decimal to octal
+11. `task11()` - Check alphabet or digit
+12. `task12()` - Days between two years
+13. `task13()` - Calculate EMI
+14. `task14()` - Binary search recursive
+15. `task15()` - Quick sort
+16. `task16()` - Matrix subtraction
+17. `task17()` - Vigenere cipher encrypt
+18. `task18()` - Vigenere cipher decrypt
+19. `task19()` - Validate phone number
+20. `task20()` - Count haiku syllables
+21. `task21()` - Convert to Morse code
+22. `task22()` - Morse to text
+23. `task23()` - Calculate circle circumference
+24. `task24()` - Print arrow pattern
+25. `task25()` - Power recursion
+26. `task26()` - Check abundant number
+27. `task27()` - Generate multiples
+28. `task28()` - Product of digits
+29. `task29()` - Convert case without swapcase
+30. `task30()` - Find duplicate words
+31. `task31()` - Zip two lists
+32. `task32()` - Unzip list of tuples
+33. `task33()` - Chunk list into groups
+34. `task34()` - Transpose list of lists
+35. `task35()` - Simple tic tac toe check
+36. `task36()` - Hangman word guess
+37. `task37()` - Calculate quadratic roots
+38. `task38()` - Convert decimal to binary recursive
+39. `task39()` - Merge two sorted arrays
+40. `task40()` - Rotate matrix 90 degrees
+41. `task41()` - Simple bubble sort descending
+42. `task42()` - Count file lines
+43. `task43()` - Write list to file
+44. `task44()` - Read dict from file
+45. `task45()` - Simple CSV reader
+46. `task46()` - Set difference without operator
+47. `task47()` - Dict key exists check
+48. `task48()` - List comprehension simulate
+49. `task49()` - Filter odds
+50. `task50()` - Map add one

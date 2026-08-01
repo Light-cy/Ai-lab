@@ -8,19 +8,9 @@ graph={
     'F':{'E':0,'G':4},
     'G':{}
 }
-H={
-    'S':20,
-    'A':18,
-    'C':16,
-    'D':14,
-    'B':10,
-    'E':9,
-    'F':10,
-    'G':0
-   }
 
-def GBFS(start,goal):
-    cost =0
+def UCS(start,goal):
+    cost = 0
     path = ["S"]
     visited=[]
     queue = [cost,path]
@@ -28,11 +18,8 @@ def GBFS(start,goal):
     while queue:
         index =0
         minIndex =0
-        while index <len(queue):
-            
-            current = H[queue[minIndex+1][len(queue[minIndex+1])-1]]+queue[minIndex] #current aur next cost ko control krta,  agr +queue[minIndex] ko - queue[minIndex] krdo to maximum cost nikalne lajayega same goes for nice wala queue[index]
-            next= H[queue[index+1][len(queue[index+1])-1]]+queue[index]
-            if current > next: # ye heuristic ko control krti, condition ulti krdo to max heuristic nikalay ga
+        while index < len(queue):
+            if(queue[minIndex] > queue[index]):  # ye cost control kerti hai
                 minIndex=index
             index = index+2
             
@@ -42,17 +29,18 @@ def GBFS(start,goal):
         
         if last not in visited:
             visited.append(last)
-        if last == goal:
+        if last in goal:
             path.append(str(cost))
+	    
             return path
         
         for child in graph[last].keys():
             NewPath = list(path)  
             NewPath.append(child)    
-            queue.append(cost + graph[last][child]) 
+            queue.append(cost + graph[last][child])
             queue.append(NewPath)
     
     
     
-print(GBFS('S', 'G'))
+print(UCS('S', 'G'))
     

@@ -1,0 +1,28 @@
+graph ={
+
+    'A':['B','C'],
+    'B':['D','E'],
+    'C':['F'],
+    'D':[],
+    'E':[],
+    'F':[]
+}
+visited = []
+queue = []
+def DFS(start,visited,goal):
+  visited.append(start)
+  queue.append(start)
+  while queue:
+    node = queue.pop()
+    if node in goal:
+      print("Goal found: ", node)
+      goal.remove(node)
+    else:
+      print(node, end = " ")
+    for child in graph[node]:
+      if child not in visited:
+        visited.append(child)
+        queue.append(child)
+
+
+DFS('A',visited,['D','E'])

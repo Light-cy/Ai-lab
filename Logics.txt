@@ -1,0 +1,10 @@
+Ml ki tiyarai:
+
+
+Naive Bayes
+KNN
+K-Mean
+data cleaning ( drop na, drop duplicate)
+label encoder, one hot encoder
+TFidf Vectorizer
+graphs walay codes
